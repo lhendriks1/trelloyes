@@ -2,16 +2,22 @@ import React from 'react';
 import Card from './Card';
 import './List.css';
 
-
+List.defaultProps = {
+  onAddCard: () => {},
+}
 
 export default function List(props) {
+
+ console.log(props.cards);
   let cards = props.cards.map((card) =>
     < Card
-      key={card['id']}
-      title={card['title'] }
-      content={card['content'] }
+      id={card.id}
+      key={card.id}
+      title={card.title}
+      content={card.content}
+      onDeleteCard={props.onDeleteCard}
     />
-  )
+  );
 
   return (
     <section className='List'>
@@ -21,6 +27,7 @@ export default function List(props) {
       <div className='List-cards'>
         {cards}
         <button
+          onClick={() => props.onAddCard(props.id)}
           type='button'
           className="List-add-button"
         >
